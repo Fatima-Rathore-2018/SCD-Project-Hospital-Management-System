@@ -1,5 +1,3 @@
-# SCD_Containerization_K8s_Project
-
 # OASIS Hospital Management System
 
 ## Overview
