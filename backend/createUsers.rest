@@ -1,0 +1,68 @@
+### Create Admin User
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Admin User",
+    "email": "admin@gmail.com",
+    "password": "Admin@123",
+    "age": 35,
+    "gender": "Male",
+    "phone_number": "03001234567",
+    "role": "Admin"
+}
+
+### Create Doctor User
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Dr. John Smith",
+    "email": "doctor@hospital.com",
+    "password": "Doctor@123",
+    "age": 40,
+    "gender": "Male",
+    "phone_number": "03001234568",
+    "role": "Doctor"
+}
+
+### Create Patient User
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "name": "Sarah Johnson",
+    "email": "patient@hospital.com",
+    "password": "Patient@123",
+    "age": 28,
+    "gender": "Female",
+    "phone_number": "03001234569",
+    "role": "Patient"
+}
+
+### Login as Admin
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "admin@hospital.com",
+    "password": "Admin@123"
+}
+
+### Login as Doctor
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "doctor@hospital.com",
+    "password": "Doctor@123"
+}
+
+### Login as Patient
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "patient@hospital.com",
+    "password": "Patient@123"
+} 
