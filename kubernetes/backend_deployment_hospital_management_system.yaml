@@ -21,9 +21,25 @@ spec:
             - name: MONGO_URI
               value: mongodb://database-service:27017/OasisHospitalManagementSystem
             - name: STREAM_API_KEY
-              value: phw2qbjzvsb5
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-stream-secrets
+                  key: STREAM_API_KEY
             - name: STREAM_API_SECRET
-              value: u6tw7cxm72mj9sy9sbtzbv4f3hstsb7zwnekqv8r7bj67cgsrxchj8nbzvzqtsmy
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-stream-secrets
+                  key: STREAM_API_SECRET
+            - name: STRIPE_PUBLISH_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-stream-secrets
+                  key: STRIPE_PUBLISH_KEY
+            - name: STRIPE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-stream-secrets
+                  key: STRIPE_SECRET_KEY
 ---
 apiVersion: v1
 kind: Service
