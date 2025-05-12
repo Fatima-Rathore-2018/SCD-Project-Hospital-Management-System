@@ -18,34 +18,34 @@ jobs:
         echo "Configuring Docker to use Minikube's daemon..."
         $minikubeEnv = & minikube docker-env --shell powershell
         $minikubeEnv | ForEach-Object { Invoke-Expression $_ }
-      shell: pwsh
+      shell: powershell
 
     - name: Build Backend Docker image
       run: |
         docker build -t fatimarathore2018/backend_hms:latest -f backend/Dockerfile .
-      shell: pwsh
+      shell: powershell
 
     - name: Build Frontend Docker image
       run: |
         docker build -t fatimarathore2018/frontend_hospital_management_system:latest -f frontend/Dockerfile .
-      shell: pwsh
+      shell: powershell
 
     - name: Login to Docker Hub
       run: |
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      shell: pwsh
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      shell: powershell
 
     - name: Push Backend Docker image to Docker Hub
       run: docker push fatimarathore2018/backend_hms:latest
-      shell: pwsh
+      shell: powershell
 
     - name: Push Frontend Docker image to Docker Hub
       run: docker push fatimarathore2018/frontend_hospital_management_system:latest
-      shell: pwsh
+      shell: powershell
 
     - name: Deploy to Minikube
       run: |
         kubectl apply -f kubernetes/backend_deployment_hospital_management_system.yaml 
         kubectl apply -f kubernetes/frontend_deployment_hospital_management_system.yaml
         kubectl apply -f kubernetes/database_deployment_hospital_management_system.yaml
-      shell: pwsh
+      shell: powershell
