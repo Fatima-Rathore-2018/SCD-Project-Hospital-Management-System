@@ -20,6 +20,10 @@ spec:
           env:
             - name: MONGO_URI
               value: mongodb://database-service:27017/OasisHospitalManagementSystem
+            - name: STREAM_API_KEY
+              value: phw2qbjzvsb5
+            - name: STREAM_API_SECRET
+              value: u6tw7cxm72mj9sy9sbtzbv4f3hstsb7zwnekqv8r7bj67cgsrxchj8nbzvzqtsmy
 ---
 apiVersion: v1
 kind: Service
