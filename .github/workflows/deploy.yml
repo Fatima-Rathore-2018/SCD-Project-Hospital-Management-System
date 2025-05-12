@@ -22,12 +22,12 @@ jobs:
 
     - name: Build Backend Docker image
       run: |
-        docker build -t fatimarathore2018/backend_hms:latest -f backend/Dockerfile .
+        docker build -t fatimarathore2018/backend_hms:latest -f backend/Dockerfile backend
       shell: powershell
 
     - name: Build Frontend Docker image
       run: |
-        docker build -t fatimarathore2018/frontend_hospital_management_system:latest -f frontend/Dockerfile .
+        docker build -t fatimarathore2018/frontend_hospital_management_system:latest -f frontend/Dockerfile frontend
       shell: powershell
 
     - name: Login to Docker Hub
