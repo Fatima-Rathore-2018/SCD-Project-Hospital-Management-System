@@ -23,23 +23,48 @@ spec:
             - name: STREAM_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: stripe-stream-secrets
+                  name: my-app-secrets
                   key: STREAM_API_KEY
             - name: STREAM_API_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: stripe-stream-secrets
+                  name: my-app-secrets
                   key: STREAM_API_SECRET
             - name: STRIPE_PUBLISH_KEY
               valueFrom:
                 secretKeyRef:
-                  name: stripe-stream-secrets
+                  name: my-app-secrets
                   key: STRIPE_PUBLISH_KEY
             - name: STRIPE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: stripe-stream-secrets
+                  name: my-app-secrets
                   key: STRIPE_SECRET_KEY
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: JWT_SECRET
+            - name: SMTP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SMTP_HOST
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SMTP_PORT
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SMTP_USER
+            - name: SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SMTP_PASS
 ---
 apiVersion: v1
 kind: Service
