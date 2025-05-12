@@ -7,45 +7,45 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: self-hosted  # Ensure the runner is self-hosted.
+    runs-on: self-hosted  
 
     steps:
-    # Checkout the code from the repository.
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Set up Docker to use Minikube's Docker daemon.
     - name: Set up Docker to use Minikube's environment
       run: |
         echo "Configuring Docker to use Minikube's daemon..."
-        eval $(minikube docker-env)
-
-    # Build Docker image for the backend.
-    - name: Build Backend Docker image
-      run: |
-        docker build -t fatimarathore2018/backend_hms:latest -f Dockerfile.backend .
-
-    # Build Docker image for the frontend.
-    - name: Build Frontend Docker image
-      run: |
-        docker build -t fatimarathore2018/frontend_hospital_management_system:latest -f Dockerfile.frontend .
-
-    # Log in to Docker Hub
-    - name: Login to Docker Hub
-      run: |
-        echo "$env:DOCKER_PASSWORD" | docker login -u "$env:DOCKER_USERNAME" --password-stdin
+        $minikubeEnv = & minikube docker-env --shell powershell
+        $minikubeEnv | ForEach-Object { Invoke-Expression $_ }
       shell: pwsh
 
-    # Push Docker images to Docker Hub.
+    - name: Build Backend Docker image
+      run: |
+        docker build -t fatimarathore2018/backend_hms:latest -f backend/Dockerfile .
+      shell: pwsh
+
+    - name: Build Frontend Docker image
+      run: |
+        docker build -t fatimarathore2018/frontend_hospital_management_system:latest -f frontend/Dockerfile .
+      shell: pwsh
+
+    - name: Login to Docker Hub
+      run: |
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      shell: pwsh
+
     - name: Push Backend Docker image to Docker Hub
       run: docker push fatimarathore2018/backend_hms:latest
+      shell: pwsh
 
     - name: Push Frontend Docker image to Docker Hub
       run: docker push fatimarathore2018/frontend_hospital_management_system:latest
+      shell: pwsh
 
-    # Deploy to Minikube.
     - name: Deploy to Minikube
       run: |
         kubectl apply -f kubernetes/backend_deployment_hospital_management_system.yaml 
         kubectl apply -f kubernetes/frontend_deployment_hospital_management_system.yaml
-        kubectl apply -f kubernetes/database_deployment_hospital_management_system.yaml     
+        kubectl apply -f kubernetes/database_deployment_hospital_management_system.yaml
+      shell: pwsh
